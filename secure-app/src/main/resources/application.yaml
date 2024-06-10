@@ -1,11 +1,16 @@
 logging:
   level:
     org.springframework.web: debug
+    com.broadcom.springconsulting.ssl_demo: debug
 
 spring:
 
   application:
     name: secure-app
+
+  threads:
+    virtual:
+      enabled: true
 
 ---
 spring:
@@ -32,3 +37,38 @@ server:
   ssl:
     client-auth: need
     bundle: server
+
+management:
+
+  endpoints:
+    web.exposure.include: '*'
+
+  endpoint:
+    health:
+      show-details: ALWAYS
+      group:
+        liveness:
+          show-details: always
+        readiness:
+          show-details: always
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+
+  otlp:
+    metrics:
+      export:
+        url:
+    tracing:
+      endpoint: http://otel-collector-opentelemetry-collector.monitor.svc.cluster.local:4318/v1/traces
