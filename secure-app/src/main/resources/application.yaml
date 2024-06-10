@@ -1,0 +1,34 @@
+logging:
+  level:
+    org.springframework.web: debug
+
+spring:
+
+  application:
+    name: secure-app
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  ssl:
+    bundle:
+      jks:
+        server:
+          reload-on-update: true
+          keystore:
+            location: ${CERT_PATH}/keystore.jks
+            password: ${PASSWORD}
+            type: JKS
+          truststore:
+            location: ${CERT_PATH}/truststore.jks
+            password: ${PASSWORD}
+            type: JKS
+
+server:
+  port: 8443
+  ssl:
+    client-auth: need
+    bundle: server

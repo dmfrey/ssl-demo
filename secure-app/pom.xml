@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.broadcom.springconsulting</groupId>
+		<artifactId>ssl-demo-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>secure-app</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>secure-app</name>
+	<description>Spring Boot project implementing SSL Bundles</description>
+
+	<properties>
+		<java.version>21</java.version>
+	</properties>
+
+	<dependencies>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.graalvm.buildtools</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.broadcom.springconsulting.timeservice.Application</mainClass>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<profiles>
+
+		<profile>
+			<id>github</id>
+
+			<build>
+
+				<plugins>
+
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<mainClass>com.broadcom.springconsulting.ssl_demo.SecureApplication</mainClass>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<image>
+								<name>ghcr.io/dmfrey/${project.artifactId}:${project.version}</name>
+								<publish>true</publish>
+							</image>
+							<docker>
+								<publishRegistry>
+									<username>${env.GITHUB_USER}</username>
+									<password>${env.GITHUB_TOKEN}</password>
+									<url>https://ghcr.io</url>
+								</publishRegistry>
+							</docker>
+						</configuration>
+					</plugin>
+
+				</plugins>
+
+			</build>
+
+		</profile>
+
+	</profiles>
+
+</project>
