@@ -28,14 +28,6 @@
 		<plugins>
 
 			<plugin>
-				<groupId>org.graalvm.buildtools</groupId>
-				<artifactId>native-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>com.broadcom.springconsulting.timeservice.Application</mainClass>
-				</configuration>
-			</plugin>
-
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
@@ -52,14 +44,6 @@
 			<build>
 
 				<plugins>
-
-					<plugin>
-						<groupId>org.graalvm.buildtools</groupId>
-						<artifactId>native-maven-plugin</artifactId>
-						<configuration>
-							<mainClass>com.broadcom.springconsulting.ssl_demo.SecureApplication</mainClass>
-						</configuration>
-					</plugin>
 
 					<plugin>
 						<groupId>org.springframework.boot</groupId>
