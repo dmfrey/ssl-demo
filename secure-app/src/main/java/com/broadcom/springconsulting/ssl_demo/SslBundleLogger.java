@@ -27,10 +27,7 @@ public class SslBundleLogger {
         log.info( "Initializing SSL Bundles" );
 
         var sslBundle = sslBundles.getBundle( "server" );
-        log.info( "SSL Bundle Key: [{}]", sslBundle.getKey() );
-
-        log.info( "KeyStore type: [{}]", sslBundle.getStores().getKeyStore().getType() );
-        log.info( "TrustStore type: [{}]", sslBundle.getStores().getTrustStore().getType() );
+        log.info( "SSL Bundle: [{}]", sslBundle );
 
     }
 
