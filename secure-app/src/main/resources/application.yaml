@@ -4,10 +4,11 @@ logging:
     org.springframework.boot.web: debug
     com.broadcom.springconsulting.ssl_demo: debug
 
-server.port: 8443
-server.ssl:
-  client-auth: need
-  bundle: "server"
+server:
+  port: 8443
+  ssl:
+    client-auth: need
+    bundle: "server"
 
 spring:
 
