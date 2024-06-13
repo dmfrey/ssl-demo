@@ -5,6 +5,9 @@ logging:
     com.broadcom.springconsulting.ssl_demo: debug
 
 server.port: 8443
+server.ssl:
+  client-auth: need
+  bundle: server
 
 spring:
 
@@ -17,10 +20,6 @@ spring:
 
 ---
 spring.config.activate.on-profile: prod
-
-server.ssl:
-  client-auth: need
-  bundle: server
 
 spring.ssl.bundle.jks:
   server:
