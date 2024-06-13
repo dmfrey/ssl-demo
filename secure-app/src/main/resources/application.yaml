@@ -4,6 +4,8 @@ logging:
     org.springframework.boot.web: debug
     com.broadcom.springconsulting.ssl_demo: debug
 
+server.port: 8443
+
 spring:
 
   application:
@@ -14,30 +16,23 @@ spring:
       enabled: true
 
 ---
-spring:
-  config:
-    activate:
-      on-profile: prod
+spring.config.activate.on-profile: prod
 
-  ssl:
-    bundle:
-      jks:
-        server:
-          reload-on-update: true
-          keystore:
-            location: ${CERT_PATH}/keystore.jks
-            password: ${PASSWORD}
-            type: JKS
-          truststore:
-            location: ${CERT_PATH}/truststore.jks
-            password: ${PASSWORD}
-            type: JKS
+server.ssl:
+  client-auth: need
+  bundle: server
 
-server:
-  port: 8443
-  ssl:
-    client-auth: need
-    bundle: server
+spring.ssl.bundle.jks:
+  server:
+    reload-on-update: true
+    keystore:
+      location: ${CERT_PATH}/keystore.jks
+      password: ${PASSWORD}
+      type: JKS
+    truststore:
+      location: ${CERT_PATH}/truststore.jks
+      password: ${PASSWORD}
+      type: JKS
 
 management:
 
